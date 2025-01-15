@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useState } from 'react'
 import './App.css'
 import PotionItem from './components/PotionItem'
@@ -21,6 +22,7 @@ function App() {
   const handleFilter = () => {
     
   }
+
 
   return (
       <>
