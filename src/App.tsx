@@ -1,10 +1,14 @@
 import './App.css'
+import PotionItem from './components/PotionItem'
+import { potions } from './data/data'
 
 function App() {
   return (
-    <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
+    <div className='grid grid-cols-2 gap-3'>
+      {potions.map(potion => {
+        return <PotionItem potion={potion} />
+      })}
+    </div>
   )
 }
 
