@@ -6,6 +6,7 @@ import { Potion } from './types/Potion'
 import Button from './components/Button'
 import EffectFilter from './components/EffectFilter'
 import LevelFilter from './components/LevelFilter'
+import { findPotionByEffect } from './helpers/potionHelpers'
 
 
 function App() {
@@ -18,8 +19,19 @@ function App() {
     console.log(secondaryEffectText);
   }, [secondaryEffectText]); 
 
-  const handleFilter = () => {
+  const handleClear = () => {
     setDisplayedPotions(potions);
+  }
+
+  const handleFilter = () => {
+
+    let filteredPotions = displayedPotions;
+
+    if (secondaryEffectText) {
+      filteredPotions = findPotionByEffect(filteredPotions, secondaryEffectText);
+    }
+
+    setDisplayedPotions(filteredPotions);
   }
 
 
@@ -37,11 +49,20 @@ function App() {
             label='Filter' 
             onClick={handleFilter}
           />
+
+          <Button 
+            label='Clear' 
+            onClick={handleClear}
+          />
         </div>
         <div className='grid grid-cols-2 gap-3'>
+          {displayedPotions.length === 0 && (
+            <h1>No condition fulfils the filter.</h1>
+          )}
           {displayedPotions.map((potion, index) => {
             return <PotionItem potion={potion} key={index} />
           })}
+
         </div>
       </>
     )
