@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useState } from 'react'
 import './App.css'
 import PotionItem from './components/PotionItem'
@@ -16,6 +17,10 @@ function App() {
     console.log(secondaryEffectText);
   }, [secondaryEffectText]); 
 
+  const handleFilter = () => {
+    
+  }
+
   return (
       <>
         <div className={`bg-gray-900 border-2 border-[#cda882] mb-3 p-3 gap-3 flex`}>
@@ -25,7 +30,8 @@ function App() {
           />
 
           <Button 
-            label='Filter' 
+            label='Filter'
+            onClick={handleFilter} 
             />
         </div>
         <div className='grid grid-cols-2 gap-3'>
