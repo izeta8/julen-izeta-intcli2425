@@ -1,5 +1,4 @@
 import { Potion } from "../types/Potion";
-import { MAIN_BORDER_COLOR, BLUE_BACKGROUND } from "../constants/constants";
 import { capitalizeFirstLetter } from "../helpers/utils";
 import Button from "./Button";
 
@@ -14,14 +13,14 @@ const PotionItem: React.FC<PotionItemProps> = ({potion}) => {
   const {boss, chance: dropChance} = availability;
 
   return (
-    <div className={`bg-[${BLUE_BACKGROUND}] border-2 border-[${MAIN_BORDER_COLOR}] grid grid-cols-[9rem_1fr] rounded-sm`}>
+    <div className={`bg-gray-900 border-2 border-[#cda882] grid grid-cols-[9rem_1fr] rounded-sm`}>
       {/* Image */}
       <div>
-        <img src={`/${image}`} className="w-full border-[${MAIN_BORDER_COLOR}] border-r" />
+        <img src={`/${image}`} className="w-full border-[#cda882] border-r" />
       </div>
 
       {/* Texts */}
-      <div className="w-full flex flex-wrap p-2 items-center items-center">
+      <div className="w-full flex flex-wrap p-2 items-center">
 
         <p className="text-xl text-center w-full unde">
           {name}
