@@ -3,10 +3,11 @@ import { capitalizeFirstLetter } from "../helpers/utils";
 import Button from "./Button";
 
 interface PotionItemProps {
-  potion: Potion
+  potion: Potion;
+  setModalPotion: Function;
 }
 
-const PotionItem: React.FC<PotionItemProps> = ({potion}) => {
+const PotionItem: React.FC<PotionItemProps> = ({potion, setModalPotion}) => {
 
   const {name, image, rarity} = potion;
   const availability = potion.meta.availability.drop_rate;
@@ -16,7 +17,7 @@ const PotionItem: React.FC<PotionItemProps> = ({potion}) => {
     <div className={`bg-gray-900 border-2 border-[#cda882] grid grid-cols-[9rem_1fr] rounded-sm`}>
       {/* Image */}
       <div>
-        <img src={`/${image}`} className="w-full border-[#cda882] border-r" />
+        <img src={`/potions/${image}`} className="w-full border-[#cda882] border-r" />
       </div>
 
       {/* Texts */}
@@ -39,7 +40,7 @@ const PotionItem: React.FC<PotionItemProps> = ({potion}) => {
         <div className="w-full">
         <Button 
           label="See more"
-          onClick={() => {console.log("CLICKED")}}
+          onClick={() => {setModalPotion(potion)}}
         />
         </div>
 

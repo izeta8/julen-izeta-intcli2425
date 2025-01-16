@@ -8,10 +8,12 @@ import LevelFilter from './components/LevelFilter'
 import { findPotionByEffect, filterByLevelRequirement, getPotionsByRarity } from './helpers/potionHelpers'
 import RarityFilter from './components/RarityFilter'
 import CraftTimeButton from './components/CraftTimeButton'
+import PotionModal from './components/PotionModal'
 
 function App() {
 
   const [displayedPotions, setDisplayedPotions] = useState<Potion[]>(potions);
+  const [modalPotion, setModalPotion] = useState<Potion|undefined>(undefined);
 
   const [levelValue, setLevelValue] = useState<number>(50);
   const [raritySelection, setRaritySelection] = useState<string|undefined>(undefined);
@@ -50,6 +52,13 @@ function App() {
 
   return (
       <>
+        {modalPotion && (
+          <PotionModal
+            potion={modalPotion}
+            setPotion={setModalPotion}
+          />
+        )}
+
         <div className={`bg-gray-900 border-2 border-[#cda882] mb-3 p-3 gap-3 grid grid-cols-4`}>
           
           <div>
@@ -86,7 +95,7 @@ function App() {
             <h1>No condition fullfils the filter.</h1>
           )}
           {displayedPotions.map((potion, index) => {
-            return <PotionItem potion={potion} key={index} />
+            return <PotionItem potion={potion} setModalPotion={setModalPotion} key={index} />
           })}
 
         </div>
