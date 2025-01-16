@@ -66,6 +66,7 @@ function App() {
           displayedPotions={displayedPotions}
         />
 
+        {/* Render Potions */}
         <div className='grid grid-cols-2 gap-3'>
           {displayedPotions.map((potion, index) => {
             return <PotionItem potion={potion} setModalPotion={setModalPotion} key={index} />
@@ -73,6 +74,7 @@ function App() {
 
         </div>
 
+        {/* Message if no potion is displayed */}
         {displayedPotions.length === 0 && (
           <div className='w-full bg-gray-900 p-4 border-2 border-[#cda882]'>
             <h1 className='text-xl italic'>There is no potion that matches the filter.</h1>
