@@ -7,7 +7,7 @@ import EffectFilter from './components/EffectFilter'
 import LevelFilter from './components/LevelFilter'
 import { findPotionByEffect, filterByLevelRequirement, getPotionsByRarity } from './helpers/potionHelpers'
 import RarityFilter from './components/RarityFilter'
-
+import CraftTimeButton from './components/CraftTimeButton'
 
 function App() {
 
@@ -16,21 +16,15 @@ function App() {
   const [levelValue, setLevelValue] = useState<number>(50);
   const [raritySelection, setRaritySelection] = useState<string|undefined>(undefined);
   const [secondaryEffectText, setSecondaryEffectText] = useState<string|undefined>(undefined);
+  const [craftTime, setCraftTime] = useState<string|undefined>(undefined);
 
   useEffect(() => {
     handleFilter();
   }, [secondaryEffectText, levelValue, raritySelection]); 
 
-  useEffect(() => {
-    console.log(raritySelection);
-  }, [raritySelection]); 
-
-  // const handleClear = () => {
-  //   setDisplayedPotions(potions);
-  // }
-
   const handleFilter = () => {
 
+    const displayedAmount = displayedPotions.length;
     let filteredPotions = potions;
 
     // Filter by level slider.
@@ -48,31 +42,45 @@ function App() {
       filteredPotions = findPotionByEffect(filteredPotions, secondaryEffectText);
     }
 
-
+    // If any filter changes 
+    if (filteredPotions.length !== displayedAmount) {
+      setCraftTime(undefined);
+    }
 
     setDisplayedPotions(filteredPotions);
   }
 
 
-
-
   return (
       <>
-        <div className={`bg-gray-900 border-2 border-[#cda882] mb-3 p-3 gap-3 flex`}>
+        <div className={`bg-gray-900 border-2 border-[#cda882] mb-3 p-3 gap-3 grid grid-cols-4`}>
           
-          <LevelFilter 
-            inputValue={levelValue}
-            setLevelValue={setLevelValue}
-          />
+          <div>
+            <LevelFilter 
+              inputValue={levelValue}
+              setLevelValue={setLevelValue}
+            />
+          </div>
 
-          <RarityFilter
-            setRaritySelection={setRaritySelection}
-          />
+          <div>
+            <RarityFilter
+              setRaritySelection={setRaritySelection}
+            />
+          </div>
 
+          <div>
+            <EffectFilter 
+              setSecondaryEffectText={setSecondaryEffectText}
+            />
+          </div>
 
-          <EffectFilter 
-            setSecondaryEffectText={setSecondaryEffectText}
-          />
+          <div>
+            <CraftTimeButton
+              craftTime={craftTime}
+              setCraftTime={setCraftTime}
+              potions={displayedPotions}          
+            />
+          </div>
 
 
         </div>
