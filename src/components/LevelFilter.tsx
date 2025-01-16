@@ -1,23 +1,16 @@
+interface LevelFilterProps {
+  inputValue: number;
+  setLevelValue: Function;
+}
 
-import { Slider } from "@nextui-org/slider";
+const LevelFilter: React.FC<LevelFilterProps> = ({inputValue, setLevelValue}) => {
 
-// interface LevelFilterProps {
-
-// }
-
-// const LevelFilter: React.FC<LevelFilterProps> = () => {
-
-const LevelFilter = () => {
   return (
-    <Slider
-      className="max-w-md"
-      defaultValue={0.4}
-      label="Temperature"
-      maxValue={1}
-      minValue={0}
-      step={0.01}
-    />
-  );
+    <>
+      <input type="range" min="0" max="100" value={inputValue} step="1" onChange={(e) => setLevelValue(e.target.value)}  />
+      <p>{inputValue}</p>
+    </>
+  )
 }
 
 export default LevelFilter;
