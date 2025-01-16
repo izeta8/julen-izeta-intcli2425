@@ -20,7 +20,7 @@ const PotionModal: React.FC<PotionModalProps> = ({potion, setPotion}) => {
   const restrictionsText = classRestrictions.join(", ");
 
   return (
-    <div className="fixed top-0 left-0 w-full h-full bg-black/60 transition-all flex justify-center items-center"
+    <div className="fixed z-50 top-0 left-0 w-full h-full bg-black/60 transition-all flex justify-center items-center"
       onClick={() => {setPotion(undefined)}}
     >
       <div
