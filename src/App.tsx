@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import PotionItem from './components/PotionItem'
 import { potions } from './data/data'
 import { Potion } from './types/Potion'
-import EffectFilter from './components/EffectFilter'
-import LevelFilter from './components/LevelFilter'
 import { findPotionByEffect, filterByLevelRequirement, getPotionsByRarity } from './helpers/potionHelpers'
-import RarityFilter from './components/RarityFilter'
-import CraftTimeButton from './components/CraftTimeButton'
+
+
+import PotionItem from './components/PotionItem'
+import Filters from './components/Filter'
 import PotionModal from './components/PotionModal'
 
 function App() {
@@ -57,37 +56,16 @@ function App() {
           />
         )}
 
-        <div className={`bg-gray-900 border-2 border-[#cda882] mb-3 p-3 gap-3 flex justify-around`}>
-          
-          <div className='bg-slate-600 justify-center align-center flex w-96'>
-            <LevelFilter 
-              inputValue={levelValue}
-              setLevelValue={setLevelValue}
-            />
-          </div>
+        <Filters 
+          levelValue={levelValue}
+          setLevelValue={setLevelValue}
+          setRaritySelection={setRaritySelection}
+          setSecondaryEffectText={setSecondaryEffectText}
+          craftTime={craftTime}
+          setCraftTime={setCraftTime}
+          displayedPotions={displayedPotions}
+        />
 
-          <div className='justify-center align-center flex w-60'>
-            <RarityFilter
-              setRaritySelection={setRaritySelection}
-            />
-          </div>
-
-          <div className='justify-center align-center flex w-60'>
-            <EffectFilter 
-              setSecondaryEffectText={setSecondaryEffectText}
-            />
-          </div>
-
-          <div className='justify-center align-center flex flex-col w-52'>
-            <CraftTimeButton
-              craftTime={craftTime}
-              setCraftTime={setCraftTime}
-              potions={displayedPotions}          
-            />
-          </div>
-
-
-        </div>
         <div className='grid grid-cols-2 gap-3'>
           {displayedPotions.map((potion, index) => {
             return <PotionItem potion={potion} setModalPotion={setModalPotion} key={index} />
@@ -104,5 +82,6 @@ function App() {
       </>
     )
 }
+
 
 export default App
