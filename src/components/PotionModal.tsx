@@ -43,7 +43,6 @@ const PotionModal: React.FC<PotionModalProps> = ({potion, setPotion}) => {
         <div className="flex justify-center items-center flex-col absolute top-9 w-full">
 
           <p className="cursor-pointer text-xl" title="Required level" >
-            {/* <img src="/icons/level.png" className="w-10 rounded-full inline m-3" /> */}
             Required Level: 
             <span className="text-xl justify-center items-center h-full inline-block text-orange-200"> {levelRequirement}</span>
           </p>
@@ -55,7 +54,7 @@ const PotionModal: React.FC<PotionModalProps> = ({potion, setPotion}) => {
         </div>
 
         <div className="absolute bottom-9 w-full text-balance">
-          <p className="w-full">Class Restrictions: <span className="text-orange-100"> {restrictionsText}</span></p>
+          <p className="w-full text-lg">Class Restrictions: <span className="text-orange-100"> {restrictionsText}</span></p>
         </div>
 
       </div>
@@ -68,15 +67,18 @@ const PotionModal: React.FC<PotionModalProps> = ({potion, setPotion}) => {
         <div className="grid grid-cols-2 ">
 
           {/* Efectos primarios y secundarios */}
-          <div className="flex justify-around items-center flex-col">
+          <div className="flex items-center flex-col">
 
-            <div>
-              <p className="text-2xl">Primary Effect</p>
+
+            <div className="mb-7">
+              <h2 className="text-3xl my-4">Primary Effects</h2>
+              {/* <p className="text-2xl italic">Primary Effect</p> */}
               {renderEffect(primary)}
             </div>
 
             <div>
-              <p className="text-2xl">Secondary Effects</p>
+              <h2 className="text-3xl my-4">Secondary Effects</h2>
+              {/* <p className="text-2xl">Secondary Effects</p> */}
               {secondary.map((secondaryEffect) => renderEffect(secondaryEffect))}
             </div>
 
@@ -84,7 +86,7 @@ const PotionModal: React.FC<PotionModalProps> = ({potion, setPotion}) => {
 
           {/* Ingredientes con su location y region de origen */}
           <div className="flex justify-center items-center flex-col">
-            <h2 className="text-3xl my-4">INGREDIENTS</h2>
+            <h2 className="text-3xl my-4">Ingredients</h2>
             {ingredients.map((ingredient) => renderIngredient(ingredient))}
           </div>
 
@@ -113,17 +115,17 @@ const PotionModal: React.FC<PotionModalProps> = ({potion, setPotion}) => {
 
 const renderEffect = (effect: Effect) => {
   return (
-    <p className="text-xl">{normalizeCamelCase(effect.attribute)} <span className="text-orange-200 italic text-sm">({effect.value})</span></p>
+    <p className="text-xl">{normalizeCamelCase(effect.attribute)} <span className="text-orange-200 italic text-base">({effect.value})</span></p>
   )
 }
 
 const renderIngredient = (ingredient: Ingredient) => {
   return (
-    <>
-      <p className="text-2xl">{ingredient.name}</p>
+    <div className="mb-4">
+      <p className="text-xl">{ingredient.name}</p>
       <p className="text-base opacity-50 italic">Location: {ingredient.origin.location}</p>
       <p className="text-base opacity-50 italic">Regtion: {ingredient.origin.region}</p>
-    </>
+    </div>
   )
 }
 
