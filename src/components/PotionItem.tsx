@@ -14,20 +14,17 @@ const PotionItem: React.FC<PotionItemProps> = ({potion, setModalPotion}) => {
   const {boss, chance: dropChance} = availability;
 
   return (
-    <div className={`bg-gray-900 border-2 border-[#cda882] grid grid-cols-[10.5rem_1fr] rounded-sm`}>
-      {/* Image */}
-      <div>
-        <img src={`/potions/${image}`} className="w-full border-[#cda882] border-r" />
-      </div>
+    <div className={`bg-gray-900 border-2 border-[#cda882] rounded-sm p-3 gap-3 flex flex-col justify-center items-center`}>
 
-      {/* Texts */}
-      <div className="w-full flex flex-wrap p-2 items-center">
+        <div className="flex justify-center items-center">
+          <img src={`/potions/${image}`} className="w-24 border-[#cda882] border rounded-md" />
+        </div>
 
         <p className="text-3xl text-center w-full">
           {name}
         </p>
 
-        <p className="text-center w-full italic text-gray-500 text-xl">
+        <p className="text-center w-full italic text-gray-500 text-2xl">
           {capitalizeFirstLetter(rarity)}
         </p>
         
@@ -44,7 +41,6 @@ const PotionItem: React.FC<PotionItemProps> = ({potion, setModalPotion}) => {
         />
         </div>
 
-      </div>
     </div>
   )
 

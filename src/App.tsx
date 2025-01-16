@@ -56,18 +56,8 @@ function App() {
           />
         )}
 
-        <Filters 
-          levelValue={levelValue}
-          setLevelValue={setLevelValue}
-          setRaritySelection={setRaritySelection}
-          setSecondaryEffectText={setSecondaryEffectText}
-          craftTime={craftTime}
-          setCraftTime={setCraftTime}
-          displayedPotions={displayedPotions}
-        />
-
         {/* Render Potions */}
-        <div className='grid grid-cols-2 gap-3'>
+        <div className='grid grid-cols-5 gap-3'>
           {displayedPotions.map((potion, index) => {
             return <PotionItem potion={potion} setModalPotion={setModalPotion} key={index} />
           })}
@@ -80,6 +70,18 @@ function App() {
             <h1 className='text-3xl italic'>There is no potion that matches the filter.</h1>
           </div>
         )}
+
+        <div className='fixed bottom-4 w-[1815px]'>
+          <Filters 
+            levelValue={levelValue}
+            setLevelValue={setLevelValue}
+            setRaritySelection={setRaritySelection}
+            setSecondaryEffectText={setSecondaryEffectText}
+            craftTime={craftTime}
+            setCraftTime={setCraftTime}
+            displayedPotions={displayedPotions}
+          />
+        </div>
 
       </>
     )

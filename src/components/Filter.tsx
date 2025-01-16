@@ -24,7 +24,7 @@ const Filters: React.FC<FiltersProps> = ({
   displayedPotions,
 }) => {
   return (
-    <div className={`bg-gray-900 border-2 border-[#cda882] mb-3 p-3 gap-3 flex justify-around`}>
+    <div className={`bg-gray-900 border-2 border-[#cda882] p-3 gap-3 flex justify-around`}>
           
       <div className='bg-slate-600 justify-center align-center flex w-96'>
         <LevelFilter 
