@@ -17,5 +17,9 @@ export const parseTime = (duration: Duration): number => {
 export const capitalizeFirstLetter = (string: string): string => {
   if (!string) return ''; // Handle empty string
   return String(string).charAt(0).toUpperCase() + String(string).slice(1);
-  // return string.charAt(0).toUpperCase() + string.slice(1).replaceAll('_', ' ');
+}
+
+export const normalizeCamelCase = (string: string): string => {
+  const result = string.replace(/([A-Z])/g, " $1");
+  return result.charAt(0).toUpperCase() + result.slice(1);
 }
