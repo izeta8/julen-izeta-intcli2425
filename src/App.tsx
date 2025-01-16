@@ -5,18 +5,25 @@ import { potions } from './data/data'
 import { Potion } from './types/Potion'
 import EffectFilter from './components/EffectFilter'
 import LevelFilter from './components/LevelFilter'
-import { findPotionByEffect, filterByLevelRequirement } from './helpers/potionHelpers'
+import { findPotionByEffect, filterByLevelRequirement, getPotionsByRarity } from './helpers/potionHelpers'
+import RarityFilter from './components/RarityFilter'
 
 
 function App() {
 
   const [displayedPotions, setDisplayedPotions] = useState<Potion[]>(potions);
-  const [secondaryEffectText, setSecondaryEffectText] = useState<string|undefined>(undefined);
+
   const [levelValue, setLevelValue] = useState<number>(50);
+  const [raritySelection, setRaritySelection] = useState<string|undefined>(undefined);
+  const [secondaryEffectText, setSecondaryEffectText] = useState<string|undefined>(undefined);
 
   useEffect(() => {
     handleFilter();
-  }, [secondaryEffectText, levelValue]); 
+  }, [secondaryEffectText, levelValue, raritySelection]); 
+
+  useEffect(() => {
+    console.log(raritySelection);
+  }, [raritySelection]); 
 
   // const handleClear = () => {
   //   setDisplayedPotions(potions);
@@ -28,6 +35,11 @@ function App() {
 
     // Filter by level slider.
     filteredPotions = filterByLevelRequirement(filteredPotions, levelValue);
+
+    // Filter by rarity.
+    if (raritySelection && raritySelection !== "Filter by rarity") {
+      filteredPotions = getPotionsByRarity(filteredPotions, raritySelection);
+    }
 
     // Filter by secondary effect.
     if (secondaryEffectText) {
@@ -51,6 +63,10 @@ function App() {
           <LevelFilter 
             inputValue={levelValue}
             setLevelValue={setLevelValue}
+          />
+
+          <RarityFilter
+            setRaritySelection={setRaritySelection}
           />
 
 
