@@ -91,14 +91,18 @@ function App() {
 
         </div>
         <div className='grid grid-cols-2 gap-3'>
-          {displayedPotions.length === 0 && (
-            <h1>No condition fullfils the filter.</h1>
-          )}
           {displayedPotions.map((potion, index) => {
             return <PotionItem potion={potion} setModalPotion={setModalPotion} key={index} />
           })}
 
         </div>
+
+        {displayedPotions.length === 0 && (
+          <div className='w-full bg-gray-900 p-4 border-2 border-[#cda882]'>
+            <h1 className='text-xl italic'>There is no potion that matches the filter.</h1>
+          </div>
+        )}
+
       </>
     )
 }
