@@ -41,8 +41,6 @@ function App() {
 
     // Filter by secondary effect.
     if (secondaryEffectText) {
-      console.log(filteredPotions);
-
       filteredPotions = findPotionByEffect(filteredPotions, secondaryEffectText);
     }
 
