@@ -59,28 +59,28 @@ function App() {
           />
         )}
 
-        <div className={`bg-gray-900 border-2 border-[#cda882] mb-3 p-3 gap-3 grid grid-cols-4`}>
+        <div className={`bg-gray-900 border-2 border-[#cda882] mb-3 p-3 gap-3 flex justify-around`}>
           
-          <div>
+          <div className='bg-slate-600 justify-center align-center flex w-96'>
             <LevelFilter 
               inputValue={levelValue}
               setLevelValue={setLevelValue}
             />
           </div>
 
-          <div>
+          <div className='justify-center align-center flex w-60'>
             <RarityFilter
               setRaritySelection={setRaritySelection}
             />
           </div>
 
-          <div>
+          <div className='justify-center align-center flex w-60'>
             <EffectFilter 
               setSecondaryEffectText={setSecondaryEffectText}
             />
           </div>
 
-          <div>
+          <div className='justify-center align-center flex flex-col w-52'>
             <CraftTimeButton
               craftTime={craftTime}
               setCraftTime={setCraftTime}
