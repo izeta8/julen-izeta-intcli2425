@@ -1,6 +1,6 @@
 import { Effect } from "./Effect";
 import { SecondaryEffect } from "./SecondaryEffect";
-import { Ingredients } from "./Ingredients";
+import { Ingredient } from "./Ingredient";
 import { Crafting } from "./Crafting";
 import { Usage } from "./Usage";
 import { Meta } from "./Meta";
@@ -14,7 +14,7 @@ export interface Potion {
     primary: Effect,
     secondary: SecondaryEffect[]
   };
-  ingredients: Ingredients[];
+  ingredients: Ingredient[];
   crafting: Crafting;
   usage: Usage;
   meta: Meta;
