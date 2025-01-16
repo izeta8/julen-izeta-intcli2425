@@ -24,7 +24,9 @@ function App() {
 
   const handleFilter = () => {
 
-    const displayedAmount = displayedPotions.length;
+    // If any filter changes remove the craft time button. 
+    setCraftTime(undefined);
+
     let filteredPotions = potions;
 
     // Filter by level slider.
@@ -40,11 +42,6 @@ function App() {
       console.log(filteredPotions);
 
       filteredPotions = findPotionByEffect(filteredPotions, secondaryEffectText);
-    }
-
-    // If any filter changes 
-    if (filteredPotions.length !== displayedAmount) {
-      setCraftTime(undefined);
     }
 
     setDisplayedPotions(filteredPotions);
