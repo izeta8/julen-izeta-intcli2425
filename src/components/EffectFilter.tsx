@@ -11,7 +11,7 @@ const EffectFilter: React.FC<EffectFilterProps> = ({setSecondaryEffectText}) => 
   
   return (
     <div className="w-full h-full text-center border-2 border-[#cda882]">
-      <input type="text" placeholder="Filter by secondary effect" className="w-full h-full text-center bg-gray-900" onChange={(e) => handleInputChange((e.target as HTMLInputElement).value)} />
+      <input type="text" placeholder="Filter by secondary effect" className="w-full h-full text-center bg-gray-900 text-2xl" onChange={(e) => handleInputChange((e.target as HTMLInputElement).value)} />
     </div>
   )
 

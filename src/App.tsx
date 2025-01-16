@@ -77,7 +77,7 @@ function App() {
         {/* Message if no potion is displayed */}
         {displayedPotions.length === 0 && (
           <div className='w-full bg-gray-900 p-4 border-2 border-[#cda882]'>
-            <h1 className='text-xl italic'>There is no potion that matches the filter.</h1>
+            <h1 className='text-3xl italic'>There is no potion that matches the filter.</h1>
           </div>
         )}
 

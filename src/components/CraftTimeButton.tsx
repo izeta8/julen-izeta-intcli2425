@@ -22,7 +22,7 @@ const CraftTimeButton: React.FC<CraftTimeButtonProps> = ({craftTime, setCraftTim
         label="Craft Time"
         onClick={handleCraftTime}
       />
-      {craftTime && (<p>{craftTime}</p>)}
+      {craftTime && (<p className="text-2xl">{craftTime}</p>)}
     </>
   )
 
