@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-// import { potions } from './data/data'
 import { Potion } from './types/Potion'
 import { findPotionByEffect, filterByLevelRequirement, getPotionsByRarity } from './helpers/potionHelpers'
 import { getPotions } from './api/api'
@@ -8,7 +7,8 @@ import PotionItem from './components/PotionItem'
 import Filters from './components/Filter'
 import PotionModal from './components/PotionModal'
 
-import {Spinner} from "@heroui/spinner";
+import Loading from './components/Loading'
+// import { potions } from './data/data'
 
 function App() {
 
@@ -22,24 +22,25 @@ function App() {
   const [craftTime, setCraftTime] = useState<string|undefined>(undefined);
 
   const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string|undefined>(undefined);
 
   useEffect(() => {
-
-    try {
-      (async () => {
+    (async () => {
+      try {
         setLoading(true);
         const potions = await getPotions();
+        if (!potions) {throw new Error("There was an error getting the list of potions.")}
         setPotions(potions);
         setDisplayedPotions(potions);
-      })();
-    } catch (error) {
-      if (error instanceof Error) {
-        console.log("There has been an error: ", error.message)
-      } 
-    } finally {
-      setLoading(false);
-    }
-    
+      } catch (error) {
+        if (error instanceof Error) {   
+          setError(error.message);
+          console.log("There has been an error: ", error.message)
+        } 
+      } finally {
+        setLoading(false);
+      }
+    })();
   }, []);
 
   useEffect(() => {
@@ -79,42 +80,50 @@ function App() {
       )}
 
 
-      {(loading || potions.length === 0) ?
-          <div className='fixed top-0 left-0 flex h-full w-full justify-center items-center bg-black/50 z-50'>
-            <Spinner size='lg' color='warning' className='scale-150' />
-          </div>
+      {(loading || (potions.length === 0 && !error)) ?
+        <Loading />   
         :
         <>
-          {/* Render Potions */}
-          <div className='grid grid-cols-5 gap-3'>
-            {displayedPotions.map((potion, index) => {
-              return <PotionItem potion={potion} setModalPotion={setModalPotion} key={index} />
-            })}
-          </div>
-
-          {/* Message if no potion is displayed */}
-          {displayedPotions.length === 0 && (
+          {error ?
+          (
             <div className='w-full bg-gray-900 p-4 border-2 border-[#cda882]'>
-              <h1 className='text-3xl italic'>There is no potion that matches the filter.</h1>
+              <h1 className='text-3xl italic'>There has been an internal error: {error}</h1>
             </div>
-          )}
+          )
+          :
+          (
+            <>
+            {/* Render Potions */}
+            <div className='grid grid-cols-5 gap-3'>
+              {displayedPotions.map((potion, index) => {
+                return <PotionItem potion={potion} setModalPotion={setModalPotion} key={index} />
+              })}
+            </div>
+
+            {/* Message if no potion is displayed */}
+            {displayedPotions.length === 0 && (
+              <div className='w-full bg-gray-900 p-4 border-2 border-[#cda882]'>
+                <h1 className='text-3xl italic'>There is no potion that matches the filter.</h1>
+              </div>
+            )}
+
+            <div className='fixed left-[50%] translate-x-[-50%] bottom-4 w-[95%] max-w-[1880px] bg-red-700'>
+              <Filters 
+                levelValue={levelValue}
+                setLevelValue={setLevelValue}
+                setRaritySelection={setRaritySelection}
+                setSecondaryEffectText={setSecondaryEffectText}
+                craftTime={craftTime}
+                setCraftTime={setCraftTime}
+                displayedPotions={displayedPotions}
+              />
+            </div>
+            </>
+          )
+          }
+          
         </>
       }
-      
-     
-
-      <div className='fixed bottom-4 w-[1815px] bg-red-700'>
-        <Filters 
-          levelValue={levelValue}
-          setLevelValue={setLevelValue}
-          setRaritySelection={setRaritySelection}
-          setSecondaryEffectText={setSecondaryEffectText}
-          craftTime={craftTime}
-          setCraftTime={setCraftTime}
-          displayedPotions={displayedPotions}
-        />
-      </div>
-
     </>
   )
 }
